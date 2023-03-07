@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  let words = ["this","is","the","thing","that","you","need","to","type"]
+  let words = ["this","is","the","thing","that","you","need","to","type","this","is","the","thing","that","you","need","to","type","this","is","the","thing","that","you","need","to","type","this","is","the","thing","that","you","need","to","type"]
   let typed = []
   $: wordsTest = words.join("")
   let spaceCount = 0
@@ -24,6 +24,11 @@
     document.addEventListener("keydown",onKeyDown)
   })
   $: console.log(typed)
+  const reset = () => {
+    typed = []
+    input = ""
+    spaceCount = 0
+  }
 </script>
 
 <main>
@@ -43,22 +48,35 @@
   <input type="text" placeholder="type here" on:keydown={handleKeyDown} bind:value={input}>
   <p>length: {length}</p>
   <p>word: {spaceCount+1}</p>
+  <button on:click={reset}>RESET</button>
 </main>
 
 <style>
+  main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 .paragraph-container{
   display: flex;
   gap: 1rem;
   justify-content: center;
-  font-size: larger;
+  font-size: 2rem;
   font-weight: bolder;
   position: relative;
+  border: 1px solid white;
+  width: 50rem;
+  flex-wrap: wrap;
+  margin-bottom: 5rem;
 }
 input{
   width: 50vw;
   height: 2rem;
   font-size: larger;
   padding: 1rem;
+  opacity: 100;
 }
 
 .success{
